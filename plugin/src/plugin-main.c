@@ -1,0 +1,15 @@
+#include <obs-module.h>
+#include <plugin-support.h>
+
+#include "app/app.h"
+
+OBS_DECLARE_MODULE()
+OBS_MODULE_USE_DEFAULT_LOCALE(PLUGIN_NAME, "en-US")
+
+bool obs_module_load(void) {
+	return app_run();
+}
+
+void obs_module_unload(void) {
+	app_shutdown();
+}

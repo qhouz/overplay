@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'Geist';
+    src: url('/src/assets/fonts/Geist[wght].woff2') format('woff2 supports variations'),
+         url('/src/assets/fonts/Geist[wght].woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: transparent;
+    font-family: 'Geist', 'Calibri', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+}
+
+#container {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    height: 60px;
+    width: fit-content;
+    box-sizing: border-box;
+
+    border-radius: 25.6px;
+    corner-shape: superellipse(1.6);
+
+    background: rgba(5, 7, 13, 0.985);
+
+    outline: 1px solid rgba(255, 255, 255, 0.03);
+    outline-offset: -1px;
+
+    --glow: rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 0 12px 1px rgba(5, 7, 13, 0.5),
+        inset -20px -16px 64px -24px var(--glow);
+
+    pointer-events: none;
+
+    transform: translateX(calc(100% + 28px));
+    opacity: 0;
+    transition:
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.32s ease,
+        margin-top 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast.hide {
+    transform: translateX(calc(100% + 28px));
+    opacity: 0;
+    transition:
+        transform 0.28s cubic-bezier(0.55, 0, 1, 0.45),
+        opacity 0.28s ease;
+}
+
+.toast.updating {
+    opacity: 0.4;
+    transition: opacity 0.15s ease;
+}
+
+.toast.group-rec-start  { --glow: rgba(255, 50, 50, 0.15); }
+.toast.group-rec-stop   { --glow: rgba(156, 163, 175, 0.15); }
+.toast.group-rp-start   { --glow: rgba(29, 161, 242, 0.15); }
+.toast.group-rp-stop    { --glow: rgba(156, 163, 175, 0.15); }
+.toast.group-rp-saved   { --glow: rgba(242, 242, 242, 0.15); }
+
+.icon-wrap {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12.8px;
+    corner-shape: superellipse(1.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-wrap svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.icon-rec-start  { background: rgba(255, 50,  50,  0.25); }
+.icon-rec-stop   { background: rgba(156, 163, 175, 0.25); }
+.icon-rp-start   { background: rgba(29,  161, 242, 0.25); }
+.icon-rp-stop    { background: rgba(156, 163, 175, 0.25); }
+.icon-rp-saved   { background: rgba(242, 242, 242, 0.25); }
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-right: 4px;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.desc {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.3;
+    white-space: nowrap;
+}
