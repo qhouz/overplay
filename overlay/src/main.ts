@@ -49,7 +49,7 @@ const EVENTS: Record<string, ToastDef> = {
 	recording_stopped: {
 		label: "Recording",
 		desc: (e) =>
-			e.duration != null ? `Was stopped · ${formatDuration(e.duration)}` : "Was stopped",
+			e.duration != null ? `Was stopped ${formatDuration(e.duration)}` : "Was stopped",
 		iconClass: "icon-rec-stop",
 		icon: ICONS.recording_stopped,
 		duration: 3000,
