@@ -1,8 +1,4 @@
-use tauri::{
-    AppHandle, Manager,
-    menu::{Menu, MenuItem},
-    tray::TrayIconBuilder,
-};
+use tauri::{AppHandle, Manager};
 
 #[cfg(target_os = "windows")]
 mod pipe {
@@ -77,24 +73,6 @@ fn set_click_through(win: &tauri::WebviewWindow) {
     }
 }
 
-fn setup_tray(app: &mut tauri::App) -> tauri::Result<()> {
-    let quit = MenuItem::with_id(app, "quit", "Quit Overplay", true, None::<&str>)?;
-    let menu = Menu::with_items(app, &[&quit])?;
-
-    TrayIconBuilder::new()
-        .menu(&menu)
-        .show_menu_on_left_click(true)
-        .tooltip("Overplay — OBS Overlay")
-        .on_menu_event(|app, event| {
-            if event.id() == "quit" {
-                app.exit(0);
-            }
-        })
-        .build(app)?;
-
-    Ok(())
-}
-
 #[cfg(target_os = "windows")]
 fn ensure_single_instance() -> bool {
     use windows::Win32::System::Threading::CreateMutexW;
@@ -130,7 +108,6 @@ pub fn run() {
             }
 
             position_window_top_right(&handle);
-            setup_tray(app)?;
 
             #[cfg(target_os = "windows")]
             {
