@@ -13,15 +13,19 @@ include(helpers)
 
 add_library(${CMAKE_PROJECT_NAME} MODULE)
 
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/buildspec.json" _buildspec)
+string(JSON _obs_version GET ${_buildspec} dependencies obs-studio version)
+unset(_buildspec)
+list(APPEND CMAKE_MODULE_PATH "${OBS_DEPS_LOCAL_ROOT}/obs-studio-${_obs_version}/cmake/finders")
+unset(_obs_version)
+
 find_package(libobs REQUIRED)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE OBS::libobs)
 
-# FFmpeg из obs-deps
-set(OBS_DEPS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.deps/obs-deps-2025-07-11-x64")
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${OBS_DEPS_DIR}/include")
+find_package(FFmpeg COMPONENTS avformat avutil REQUIRED)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
-  "${OBS_DEPS_DIR}/lib/avformat.lib"
-  "${OBS_DEPS_DIR}/lib/avutil.lib"
+  FFmpeg::avformat
+  FFmpeg::avutil
 )
 
 if(ENABLE_FRONTEND_API)
@@ -43,8 +47,8 @@ if(ENABLE_QT)
 endif()
 
 file(GLOB_RECURSE PLUGIN_SOURCES
-    src/*.c
-    src/*.h
+  src/*.c
+  src/*.h
 )
 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${PLUGIN_SOURCES})
