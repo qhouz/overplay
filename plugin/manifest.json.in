@@ -1,0 +1,14 @@
+{
+    "display_name": "Overplay",
+    "id": "4b77a09d-a4b9-4fe7-b3d0-017b235b029b",
+    "version": "@PROJECT_VERSION@",
+    "authors": ["qhouz"],
+    "name": "overplay",
+    "description": "Desktop notifications for OBS recording and replay buffer events.",
+    "urls": {
+        "repository": "https://github.com/qhouz/overplay",
+        "support": "https://github.com/qhouz/overplay/issues"
+    },
+    "has_banner": false,
+    "has_icon": false
+}

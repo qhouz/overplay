@@ -11,6 +11,7 @@
 !.gersemirc
 !.gitignore
 !buildspec.json
+!manifest.json.in
 !CMakeLists.txt
 !CMakePresets.json
 !LICENSE
